@@ -37,4 +37,4 @@ jobs:
           uses: actions/upload-artifact@v3
           with:
             name: extent-reports
-            path: target/extent-reports/
+            path: target/

@@ -14,6 +14,7 @@ import utils.TestResult;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -32,7 +33,7 @@ public class ValuationTest extends TestBase {
         if (title != null) {
             Assert.assertTrue(title.contains("Sell your car in under an hour"));
         }
-        Thread.sleep(3000);
+       driver.wait(2000);
     }
 
     private static final String PATTERN = "\\b[A-Z]{2}[0-9]{2}\\s?[A-Z]{3}\\b";
@@ -76,8 +77,9 @@ public class ValuationTest extends TestBase {
 
           }
                 driver.navigate().to(ConfigReader.getProperty("url"));
-                Thread.sleep(1000);
-            }
+            driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
+            driver.manage().timeouts().scriptTimeout(Duration.ofSeconds(20));
+        }
         passedRegistration.close();
         failedRegistration.close();
         }

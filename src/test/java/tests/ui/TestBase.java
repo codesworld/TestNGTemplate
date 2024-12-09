@@ -21,6 +21,8 @@ public class TestBase {
         String url = ConfigReader.getProperty("url");
         DriverManager.getDriver().get(url);
         wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
+        driver.manage().timeouts().scriptTimeout(Duration.ofSeconds(20));
 
         ValuationPage valuationPage = new ValuationPage();
         valuationPage.acceptCookies();
