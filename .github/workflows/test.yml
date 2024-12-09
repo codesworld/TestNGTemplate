@@ -12,22 +12,37 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'adopt'
-          java-version: '17'
+      steps:
 
-      - name: Set up Maven
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'adopt'
-          java-version: '17'
+        - name: Checkout code
+          uses: actions/checkout@v3
 
-      - name: Install dependencies
-        run: mvn install
+        - name: Set up JDK
+          uses: actions/setup-java@v3
+          with:
+            distribution: 'adopt'
+            java-version: '17'
 
-      - name: Run tests
-        run: mvn test
+#        - name: Install Chrome and ChromeDriver
+#          run: |
+#            sudo apt-get update
+#            sudo apt-get install -y google-chrome-stable
+#            sudo apt-get install -y chromedriver
+#
+        - name: Install dependencies
+          run: mvn install
+
+#        - name: Run tests
+#          run: mvn test -Dchrome.options="--headless --disable-gpu --no-sandbox --disable-dev-shm-usage"
+#
+        - name: Upload Surefire Test Reports
+          uses: actions/upload-artifact@v3
+          with:
+            name: surefire-reports
+            path: target/surefire-reports/
+
+#        - name: Upload Extent Reports
+#          uses: actions/upload-artifact@v3
+#          with:
+#            name: extent-reports
+#            path: target/extent-reports/

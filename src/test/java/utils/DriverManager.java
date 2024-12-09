@@ -16,7 +16,7 @@ public class DriverManager {
              switch (browserType.toLowerCase()) {
                 case "chrome":
                     ChromeOptions options = new ChromeOptions();
-                    options.addArguments("--disable-gpu", "--no-sandbox", "--disable-dev-shm-usage");
+                    options.addArguments("headless","--disable-gpu", "--no-sandbox", "--disable-dev-shm-usage");
                     WebDriverManager.chromedriver().setup();
                     driver = new ChromeDriver(options);
                     break;
