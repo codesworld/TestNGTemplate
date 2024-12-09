@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -10,6 +11,7 @@ import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 
 public class ValuationPage extends BasePage{
@@ -35,9 +37,12 @@ public class ValuationPage extends BasePage{
     }
     public void acceptCookies() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-        WebElement cookieButton = wait.until(ExpectedConditions.elementToBeClickable(CAR_COOKIE));
-        //click(CAR_COOKIE);
-        cookieButton.click();
+        try {
+            WebElement cookieButton = wait.until(ExpectedConditions.elementToBeClickable(CAR_COOKIE));
+            cookieButton.click();
+        } catch (TimeoutException e) {
+            System.out.println("Cookie banner not found or not clickable: " + e.getMessage());
+        }
     }
 
     public WebElement getSorryMessage() {
