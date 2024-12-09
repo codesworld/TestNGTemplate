@@ -3,7 +3,10 @@ package pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +34,10 @@ public class ValuationPage extends BasePage{
         click(GO_BTN);
     }
     public void acceptCookies() {
-        click(CAR_COOKIE);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        WebElement cookieButton = wait.until(ExpectedConditions.elementToBeClickable(CAR_COOKIE));
+        //click(CAR_COOKIE);
+        cookieButton.click();
     }
 
     public WebElement getSorryMessage() {
