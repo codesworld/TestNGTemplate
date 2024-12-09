@@ -1,5 +1,6 @@
 package tests.ui;
 
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
@@ -42,6 +43,8 @@ public class ValuationTest extends TestBase {
     public static void registrationList() throws IOException, InterruptedException {
 
         ValuationPage valuationPage = new ValuationPage();
+        valuationPage.acceptCookies();
+        new WebDriverWait(driver, Duration.ofSeconds(20));
         TestResult passedRegistration = new TestResult("src/test/resources/passed_regs.txt");
         TestResult failedRegistration = new TestResult("src/test/resources/failed_regs.txt");
 
