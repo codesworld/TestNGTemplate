@@ -34,7 +34,7 @@ jobs:
 #          run: mvn test -Dchrome.options="--headless --disable-gpu --no-sandbox --disable-dev-shm-usage"
 #
         - name: Upload Surefire Test Reports
-          uses: actions/upload-artifact@v3
+          uses: actions/upload-artifact@v4
           with:
             name: surefire-reports
             path: target/surefire-reports/
