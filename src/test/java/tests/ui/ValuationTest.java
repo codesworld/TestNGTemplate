@@ -18,7 +18,7 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-//@Listeners({testng.TestNgListener.class, testng.RetryListener.class})
+@Listeners({testng.TestNgListener.class, testng.RetryListener.class})
 public class ValuationTest extends TestBase {
 
     @Test
