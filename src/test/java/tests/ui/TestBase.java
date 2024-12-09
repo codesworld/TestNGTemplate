@@ -25,8 +25,9 @@ public class TestBase {
         driver.manage().timeouts().scriptTimeout(Duration.ofSeconds(20));
 
         ValuationPage valuationPage = new ValuationPage();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(20));
         valuationPage.acceptCookies();
-        Thread.sleep(5000);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
         //CookieManager.addCookies(driver);
     }
