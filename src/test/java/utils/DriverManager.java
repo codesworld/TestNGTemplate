@@ -24,7 +24,7 @@ public class DriverManager {
                     chromeOptions.addArguments("--no-sandbox");
                     chromeOptions.addArguments("--disable-dev-shm-usage");
                     chromeOptions.addArguments("--disable-blink-features=AutomationControlled");
-                   // chromeOptions.addArguments("--window-size=1920,1080");
+                    chromeOptions.addArguments("--window-size=1920,1080");
                     chromeOptions.addArguments("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36");
                     chromeOptions.addArguments("--ignore-certificate-errors");
 
