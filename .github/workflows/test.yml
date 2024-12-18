@@ -32,7 +32,11 @@ jobs:
           run: mvn install
 
         - name: Run tests
-          run: mvn -B package --file pom.xml -DskipTests
+          run: | 
+             mvn clean test -DsuiteXmlFile=testng.xml \
+              -Dbrowser=chrome \
+              -DenableBrowserOptions=true \
+              -Dmaven.test.failure.ignore=true
 
         - name: Upload Surefire Test Reports
           if: always()
