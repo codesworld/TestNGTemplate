@@ -33,7 +33,7 @@ jobs:
 
         - name: Run tests
           run: |
-            xvfb-run mvn clean test -DsuiteXmlFile=testng.xml
+            xvfb-run mvn clean test -DXmlFile=testng.xml -DBrowserOptions=true
             continue-on-error: false
 
         - name: Upload Surefire Test Reports
