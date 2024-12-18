@@ -1,9 +1,10 @@
 package testng;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.MediaEntityBuilder;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
-import org.apache.commons.io.FileUtils;
+//import org.apache.commons..FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
@@ -14,6 +15,9 @@ import utils.DriverManager;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 
 public class TestNgListener implements ITestListener {
     private ExtentReports extent;
@@ -22,7 +26,7 @@ public class TestNgListener implements ITestListener {
 
     @Override
     public void onStart(ITestContext context) {
-        htmlReporter = new ExtentSparkReporter("target/extentReport1.html");
+        htmlReporter = new ExtentSparkReporter("target/extentReport.html");
         htmlReporter.config().setDocumentTitle("Automation Test Report");
         htmlReporter.config().setReportName("Test Results");
         htmlReporter.config().setTheme(Theme.STANDARD);
@@ -49,11 +53,16 @@ public class TestNgListener implements ITestListener {
         test.fail("Test failed: " + result.getMethod().getMethodName());
         WebDriver driver = DriverManager.getDriver();
         File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        String screenshotPath = "screenshots/" + result.getMethod().getMethodName() + ".png";
+        File destFile = new File(screenshotPath);
+
         try {
-            String screenshotPath = "target/screenshots/" + result.getMethod().getMethodName() + ".png";
-            FileUtils.copyFile(screenshot, new File(screenshotPath));
-            test.addScreenCaptureFromPath(screenshotPath);
+            Files.createDirectories(Path.of("target/screenshots/"));
+            Files.copy(screenshot.toPath(), destFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            test.fail("Screenshot: ", MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
+
         } catch (IOException e) {
+            e.printStackTrace();
             test.fail("Failed to attach screenshot: " + e.getMessage());
         }
     }

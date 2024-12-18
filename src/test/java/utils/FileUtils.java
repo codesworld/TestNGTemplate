@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 public class FileUtils {
 
     private static final String PATTERN = "\\b[A-Z]{2}[0-9]{2}\\s?[A-Z]{3}\\b";
+
     public static List<String> readCarRegistrations(String path) {
 
         List<String> registrations = new ArrayList<>();
@@ -28,7 +29,7 @@ public class FileUtils {
         return registrations;
     }
 
-    public static Map<String, List<String>> parseCarData(String path) throws IOException {
+    public static Map<String, List<String>> parseCarData(String path)  {
         Map<String, List<String>> carData = new HashMap<>();
 
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(path))) {
@@ -37,9 +38,12 @@ public class FileUtils {
             while ((line = bufferedReader.readLine()) != null) {
                 List<String> values = new ArrayList<>(Arrays.asList(line.split(",")));
 
-String key = values.remove(0);
+            String key = values.remove(0);
                 carData.put(key, values);
             }
+        }catch (IOException e) {
+            System.out.println("Error reading file");
+            e.printStackTrace();
         }
         return carData;
     }

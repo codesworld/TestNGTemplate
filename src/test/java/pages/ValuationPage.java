@@ -13,30 +13,31 @@ import java.util.List;
 import java.util.Map;
 
 
+public class ValuationPage extends BasePage {
 
-public class ValuationPage extends BasePage{
-
-    private static final By CAR_REGISTRATION_FIELD = By.id("registration");
     private static final By CAR_MILEAGE_FIELD = By.id("Mileage");
-    private static final By CAR_VALUATION_AMOUNT = By.className("vehicle-value");
-    private static final By CAR_COOKIE = By.id("onetrust-accept-btn-handler");
-    private static final By CAR_REGISTRATION = By.id("vehicleReg");
+    private static final By CAR_COOKIE = By.xpath("//button[contains(text(), 'Accept all')]");
+    private static final By CAR_REGISTRATION = By.xpath("//input[@id='vehicleReg']");
     private static final By GO_BTN = By.id("btn-go");
     private static final By CAR_DETAILS = By.cssSelector(".d-table-row.details-vehicle-row");
     private static final By SORRY_MESSAGE = By.cssSelector(".text-focus.ng-star-inserted");
+
     public ValuationPage() {
         super();
     }
 
     public void searchCarByRegistration(String registration, String mileage) {
-        click(CAR_REGISTRATION);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        WebElement button = wait.until(ExpectedConditions.elementToBeClickable(CAR_REGISTRATION));
+        button.click();
         sendKeys(CAR_REGISTRATION, registration);
         click(CAR_MILEAGE_FIELD);
         sendKeys(CAR_MILEAGE_FIELD, mileage);
         click(GO_BTN);
     }
+
     public void acceptCookies() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
         try {
             WebElement cookieButton = wait.until(ExpectedConditions.elementToBeClickable(CAR_COOKIE));
             cookieButton.click();
@@ -52,7 +53,7 @@ public class ValuationPage extends BasePage{
     public void findRegistration(String registration) throws InterruptedException {
         Thread.sleep(5000);
         click(CAR_REGISTRATION);
-        sendKeys(CAR_REGISTRATION,registration);
+        sendKeys(CAR_REGISTRATION, registration);
         click(GO_BTN);
     }
 
