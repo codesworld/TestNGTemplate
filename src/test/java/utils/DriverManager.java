@@ -19,7 +19,7 @@ public class DriverManager {
                 case "chrome":
                     WebDriverManager.chromedriver().setup();
                     ChromeOptions chromeOptions = new ChromeOptions();
-                    chromeOptions.addArguments("--headless=new");
+                 //   chromeOptions.addArguments("--headless=new");
                     chromeOptions.addArguments("--disable-gpu");
                     chromeOptions.addArguments("--no-sandbox");
                     chromeOptions.addArguments("--disable-dev-shm-usage");

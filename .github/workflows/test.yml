@@ -32,8 +32,8 @@ jobs:
           run: mvn install
 
         - name: Run tests
-          run: | 
-             mvn clean test -DsuiteXmlFile=testng.xml \
+          run: |
+            xvfb-run mvn clean test -DsuiteXmlFile=testng.xml \
               -Dbrowser=chrome \
               -DenableBrowserOptions=true \
               -Dmaven.test.failure.ignore=true

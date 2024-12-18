@@ -53,11 +53,12 @@ public class TestNgListener implements ITestListener {
         test.fail("Test failed: " + result.getMethod().getMethodName());
         WebDriver driver = DriverManager.getDriver();
         File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-        String screenshotPath = "screenshots/" + result.getMethod().getMethodName() + ".png";
-        File destFile = new File(screenshotPath);
+
 
         try {
             Files.createDirectories(Path.of("target/screenshots/"));
+            String screenshotPath = "target/screenshots/" + result.getMethod().getMethodName() + ".png";
+            File destFile = new File(screenshotPath);
             Files.copy(screenshot.toPath(), destFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
             test.fail("Screenshot: ", MediaEntityBuilder.createScreenCaptureFromPath(screenshotPath).build());
 
